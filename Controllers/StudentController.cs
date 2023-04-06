@@ -9,7 +9,7 @@ namespace UOW_APP.Controllers
     public class StudentController : Controller
     {
         private InterfaceStudent studentRepository;
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private UnitOfWork unitOfWork;
 
 
         public StudentController(InterfaceStudent studentRepository)
@@ -23,7 +23,7 @@ namespace UOW_APP.Controllers
 
         public ViewResult Details(int id)
         {
-            Student student = studentRepository.GetStudentByID(id);
+            Student student = unitOfWork.RepStudent.GetByID(id);
             return View(student);
         }
 
@@ -46,8 +46,8 @@ namespace UOW_APP.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    studentRepository.InsertStudent(student);
-                    studentRepository.Save();
+                    unitOfWork.RepStudent.Insert(student);
+                    unitOfWork.Save();
                     return RedirectToAction("Index");
                 }
             }
@@ -63,7 +63,7 @@ namespace UOW_APP.Controllers
 
       public ActionResult Edit(int id)
         {
-            Student student = studentRepository.GetStudentByID(id);
+            Student student = unitOfWork.RepStudent.GetByID(id);
            return View(student);
          } 
 
@@ -79,7 +79,7 @@ namespace UOW_APP.Controllers
             {
                 ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
-            Student student = studentRepository.GetStudentByID(id);
+            Student student = unitOfWork.RepStudent.GetByID(id);
             return View(student);
         }
 
@@ -93,8 +93,8 @@ namespace UOW_APP.Controllers
             try
             {
                 Student student = studentRepository.GetStudentByID(id);
-                studentRepository.DeleteStudent(id);
-                studentRepository.Save();
+                unitOfWork.RepStudent.Delete(id);
+                unitOfWork.Save();
             }
             catch (DataException /* dex */)
             {
@@ -106,7 +106,7 @@ namespace UOW_APP.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            studentRepository.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
 
