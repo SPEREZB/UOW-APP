@@ -9,19 +9,16 @@ namespace UOW_APP.Controllers
     public class StudentController : Controller
     {
         private InterfaceStudent studentRepository;
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
-        public StudentController()
-        {
-            this.studentRepository = new RepStudent(new SchoolContext());
-        }
-        [ActivatorUtilitiesConstructor]
+
         public StudentController(InterfaceStudent studentRepository)
         {
             this.studentRepository = studentRepository;
         }
 
      
-        //
+    
         // GET: /Student/Details/5
 
         public ViewResult Details(int id)
@@ -30,7 +27,7 @@ namespace UOW_APP.Controllers
             return View(student);
         }
 
-        //
+       
         // GET: /Student/Create
 
         public ActionResult Create()
@@ -38,7 +35,7 @@ namespace UOW_APP.Controllers
             return View();
         }
 
-        //
+      
         // POST: /Student/Create
 
         [HttpPost]
@@ -61,8 +58,7 @@ namespace UOW_APP.Controllers
             }
             return View(student);
         }
-
-        //
+         
         // GET: /Student/Edit/5
 
       public ActionResult Edit(int id)
@@ -71,7 +67,7 @@ namespace UOW_APP.Controllers
            return View(student);
          } 
 
-        //
+   
         // POST: /Student/Edit/5
  
          
@@ -87,7 +83,7 @@ namespace UOW_APP.Controllers
             return View(student);
         }
 
-        //
+    
         // POST: /Student/Delete/5
 
         [HttpPost]

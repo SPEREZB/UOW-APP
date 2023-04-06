@@ -8,8 +8,7 @@ namespace UOW_APP.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Age { get; set; }
-
-
+         
     }
 
     

@@ -4,11 +4,15 @@ using UOW_APP.Repositorys;
 
 namespace UOW_APP
 {
-    abstract class UnitOfWork
+    abstract class UnitOfWork : IDisposable
     {
         private SchoolContext context = new SchoolContext();
         private GenericRepository<Student> student;
 
+        public UnitOfWork()
+        {
+
+        }
         public GenericRepository<Student> RepStudent
         {
             get

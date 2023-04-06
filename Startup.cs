@@ -1,4 +1,7 @@
 ﻿using UOW_APP.Repositorys;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
 
 namespace UOW_APP
 {
@@ -16,7 +19,11 @@ namespace UOW_APP
             // Configurar servicios y registrar la implementación de InterfaceStudent
             services.AddScoped<InterfaceStudent, RepStudent>();
 
-            // Otros registros de servicios
+            services.AddTransient<InterfaceStudent, RepStudent>();
+
+            services.AddControllers();
+            services.AddSingleton<InterfaceStudent, RepStudent>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
