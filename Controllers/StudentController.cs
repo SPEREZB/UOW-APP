@@ -9,7 +9,7 @@ namespace UOW_APP.Controllers
     public class StudentController : Controller
     {
         private InterfaceStudent studentRepository;
-        private UnitOfWork unitOfWork;
+        private UnitOfWork unitOfWork= new UnitOfWork();
 
 
         public StudentController(InterfaceStudent studentRepository)

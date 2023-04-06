@@ -4,7 +4,7 @@ using UOW_APP.Repositorys;
 using Microsoft.EntityFrameworkCore;
 namespace UOW_APP
 {
-    internal class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> where TEntity : class
     {
         internal SchoolContext context;
         internal DbSet<TEntity> dbSet;
@@ -44,8 +44,8 @@ namespace UOW_APP
         }
 
         public virtual TEntity GetByID(object id)
-        {
-            return dbSet.Find(id);
+        { 
+            return dbSet.Find(id); 
         }
 
         public virtual void Insert(TEntity entity)
